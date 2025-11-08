@@ -37,4 +37,8 @@ public class User {
     this.birthDate = birthDate;
   }
 
+  @Override
+  public String toString() {
+    return String.format("User [id=%s, name=%s, birthDate= %s", id, name, birthDate);
+  }
 }
