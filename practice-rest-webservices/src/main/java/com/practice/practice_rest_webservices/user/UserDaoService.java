@@ -15,12 +15,18 @@ public class UserDaoService {
 //  UserDaoService > static List
 
   private static List<User> users = new ArrayList<>();
+//  private List<User> users = new ArrayList<>();
 
   static {
     users.add(new User(1, "Adam", LocalDate.now().minusYears(30)));
     users.add(new User(2, "Mark", LocalDate.now().minusYears(20)));
+
   }
 
+//  public UserDaoService() {
+//    users.add(new User(1, "Adam", LocalDate.now().minusYears(30)));
+//    users.add(new User(2, "Mark", LocalDate.now().minusYears(20)));
+//  }
 //  findAll
 
   public List<User> findAll() {
