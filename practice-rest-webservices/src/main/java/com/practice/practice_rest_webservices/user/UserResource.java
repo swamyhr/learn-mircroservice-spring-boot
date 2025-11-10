@@ -1,5 +1,6 @@
 package com.practice.practice_rest_webservices.user;
 
+import com.practice.practice_rest_webservices.exceptions.UserNotFoundException;
 import jakarta.annotation.Nullable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,15 @@ public class UserResource {
 
   @GetMapping("/users/{id}")
   public User getUserById(@PathVariable int id) {
-    return userDaoService.findOne(id);
+    User user = userDaoService.findOne(id);
+
+//    check if user is null or not
+//    if null throw an exception else return the formatted exception
+
+    if(user == null)
+      throw new UserNotFoundException("id: "+id);
+
+    return user;
   }
 
   @PostMapping("/users")
