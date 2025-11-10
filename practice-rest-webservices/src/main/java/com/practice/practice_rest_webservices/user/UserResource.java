@@ -4,7 +4,9 @@ import jakarta.annotation.Nullable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -29,10 +31,19 @@ public class UserResource {
     return userDaoService.findOne(id);
   }
 
-  @PostMapping("/users/createUser")
+  @PostMapping("/users")
   public ResponseEntity<Object> createUser(@RequestBody User user) {
-    userDaoService.save(user);
+     User savedUser = userDaoService.save(user);
 //    return ResponseEntity.status(HttpStatus.CREATED).build();
-    return ResponseEntity.created(null).build();
+
+//    create a url to send back with new user ID
+
+//    pseudoCode
+//    get the current URL
+//    get the new userID
+//    combine
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
+//    get the user id
+    return ResponseEntity.created(uri).build();
   }
 }
