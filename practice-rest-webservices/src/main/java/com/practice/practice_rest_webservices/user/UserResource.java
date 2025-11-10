@@ -1,8 +1,9 @@
 package com.practice.practice_rest_webservices.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.annotation.Nullable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +25,14 @@ public class UserResource {
   }
 
   @GetMapping("/users/{id}")
-  public User getUserById(@PathVariable Integer id) {
+  public User getUserById(@PathVariable int id) {
     return userDaoService.findOne(id);
   }
 
+  @PostMapping("/users/createUser")
+  public ResponseEntity<Object> createUser(@RequestBody User user) {
+    userDaoService.save(user);
+//    return ResponseEntity.status(HttpStatus.CREATED).build();
+    return ResponseEntity.created(null).build();
+  }
 }

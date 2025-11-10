@@ -13,13 +13,13 @@ import java.util.function.Predicate;
 public class UserDaoService {
 //JPA/Hibernate > Database
 //  UserDaoService > static List
-
+private static int userCount = 0;
   private static List<User> users = new ArrayList<>();
 //  private List<User> users = new ArrayList<>();
 
   static {
-    users.add(new User(1, "Adam", LocalDate.now().minusYears(30)));
-    users.add(new User(2, "Mark", LocalDate.now().minusYears(20)));
+    users.add(new User(++userCount, "Adam", LocalDate.now().minusYears(30)));
+    users.add(new User(++userCount, "Mark", LocalDate.now().minusYears(20)));
 
   }
 
@@ -31,6 +31,10 @@ public class UserDaoService {
 
   public List<User> findAll() {
     return users;
+  }
+  public void save(User user) {
+    user.setId(++userCount);
+    users.add(user);
   }
 //  save
 //  findOne
