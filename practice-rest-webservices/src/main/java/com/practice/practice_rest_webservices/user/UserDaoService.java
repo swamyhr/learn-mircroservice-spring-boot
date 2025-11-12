@@ -1,5 +1,6 @@
 package com.practice.practice_rest_webservices.user;
 
+import com.practice.practice_rest_webservices.exceptions.UserNotFoundException;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 
@@ -47,7 +48,11 @@ private static int userCount = 0;
 
   public String deleteUserById(int id) {
     Predicate<? super User> predicate = user -> user.getId().equals(id);
-    users.removeIf(predicate);
-    return "success";
+    User user = users.stream().filter(predicate).findFirst().orElse(null);
+    if(user != null) {
+      users.remove(user);
+      return "success";
+    }
+   throw new UserNotFoundException("user id not found");
   }
 }
