@@ -2,6 +2,7 @@ package com.practice.practice_rest_webservices.user;
 
 import com.practice.practice_rest_webservices.exceptions.UserNotFoundException;
 import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +42,7 @@ public class UserResource {
   }
 
   @PostMapping("/users")
-  public ResponseEntity<Object> createUser(@RequestBody User user) {
+  public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
      User savedUser = userDaoService.save(user);
 //    return ResponseEntity.status(HttpStatus.CREATED).build();
 
