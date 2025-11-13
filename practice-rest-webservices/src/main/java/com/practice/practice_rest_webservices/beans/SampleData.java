@@ -1,19 +1,17 @@
 package com.practice.practice_rest_webservices.beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 //@JsonIncludeProperties({"field1", "field2"})
-@JsonIgnoreProperties({"field1", "field2"})
+//@JsonIgnoreProperties({"field1", "field2"})
+@JsonFilter("Default_Filter")
 public class SampleData {
 
   private String field1;
   private String field2;
 
 //  @JsonIgnore
-  @JsonProperty("updated_via_jackson")
+//  @JsonProperty("updated_via_jackson")
   private String field3;
 
   public SampleData(String field1, String field2, String field3) {
